@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import API from '../../services/api'
-import PizzaLogin from '../../assets/Login.png'
-import Pizza from '../../assets/pizza.png'
 import DefaultButton from '../../component/Buttons/DefaultButton'
 import DefaultInput from '../../component/Form/DefaultInput'
 import useForm from '../../hooks/useForm'
@@ -40,7 +38,16 @@ const RequestLink = () => {
         }
     }
     return (
-        <div className="min-h-screen bg-white relative overflow-hidden">
+        <div className=" bg-white relative overflow-hidden">
+            {toast && (
+                <div className="fixed top-8 right-8 z-50">
+                    <Toast
+                        success={toast.success}
+                        message={toast.message}
+                        onClose={() => setToast(null)}
+                    />
+                </div>
+            )}
 
             <div
                 className="absolute inset-0 opacity-40"
@@ -55,7 +62,7 @@ const RequestLink = () => {
 
             <div className="relative z-10 max-w-7xl mx-auto min-h-screen flex items-center px-6">
 
-                <div className="w-full flex flex-col lg:flex-row items-center gap-12">
+                <div className="w-full flex flex-col flex-row items-center gap-12">
 
                     <div className="w-full lg:w-1/2 md:flex hidden flex-col justify-center items-start text-left">
 
@@ -137,22 +144,31 @@ const RequestLink = () => {
                                     Enter your email address and receive a secure authentication link.
                                 </p>
 
-                                <form className="space-y-5">
+                                <form method="post" onSubmit={handleRequestLink} className="space-y-5">
 
                                     <DefaultInput
                                         name="email"
                                         type="email"
                                         placeholder="username@example.com"
+                                        onChange={handleChange}
+                                        value={values.email}
                                     />
 
                                     <DefaultButton
-                                        label="Sign In"
+                                        type='submit'
+                                        label={loading ? 'Sending...' : 'Request Link'}
                                     />
 
                                 </form>
                             </div>
                         </div>
+                        <div className="text-center">
+                            <p className="mb-8 text-gray-500 text-xs ">
+                                Developed and Maintained by <a className='text-indigo-500' href="https://www.blackalphalabs.com/" target='_blank'>blackalphalabs</a>
+                            </p>
+                        </div>
                     </div>
+
 
                 </div>
             </div>

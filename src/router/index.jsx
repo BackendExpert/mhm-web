@@ -4,11 +4,8 @@ import RequestLink from '../pages/auth/RequestLink'
 import VerifyLink from '../pages/auth/VerifyLink'
 import DefultError from '../component/Errors/DefultError'
 import Guest from '../pages/auth/Guest'
-import Dashboard from '../layouts/Dashboard'
 import PrivateRoute from './PrivateRoute'
-import DashHome from '../pages/dashboard/DashHome'
-import DashError from '../component/Dashboard/DashError'
-import CreateCategories from '../pages/Food/CreateCategories'
+
 
 
 function App() {
