@@ -104,21 +104,6 @@ const DashSide = () => {
             ],
         },
         {
-            title: "Analytics",
-            items: [
-                {
-                    name: "Health Analytics",
-                    icon: <LineChart size={18} />,
-                    link: "/dashboard/analytics",
-                },
-                {
-                    name: "Historical Data",
-                    icon: <Database size={18} />,
-                    link: "/dashboard/history",
-                },
-            ],
-        },
-        {
             title: "Administration",
             items: [
                 {

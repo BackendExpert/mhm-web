@@ -1,46 +1,90 @@
 import React from "react";
-import { AlertTriangle } from "lucide-react";
+import {
+    AlertTriangle,
+    ArrowRight,
+    LifeBuoy,
+} from "lucide-react";
 
 const DashError = () => {
     return (
-        <div className="flex min-h-[80vh] w-full items-center justify-center bg-white px-6 py-16 rounded-xl">
-            <div className="flex flex-col items-center text-center max-w-xl">
+        <div className="flex min-h-[80vh] w-full items-center justify-center px-6 py-16 bg-white">
 
-                <div className="bg-orange-50 p-6 rounded-full mb-6">
-                    <AlertTriangle className="w-16 h-16 text-orange-500 animate-bounce" />
+            <div className="max-w-2xl text-center">
+
+                <div className="flex justify-center mb-8">
+
+                    <div className="relative">
+
+                        <div className="absolute inset-0 animate-pulse rounded-full bg-indigo-100" />
+
+                        <div className="relative p-6">
+
+                            <AlertTriangle
+                                className="w-16 h-16 text-indigo-600"
+                                strokeWidth={1.5}
+                            />
+
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <h1 className="text-7xl font-extrabold text-orange-500 mb-4">
+                <h1 className="text-8xl font-bold tracking-tight text-indigo-600">
                     501
                 </h1>
 
-                <h2 className="text-3xl font-semibold text-gray-800 mb-2">
-                    Feature Not Implemented
+                <h2 className="mt-4 text-3xl font-semibold tracking-tight text-gray-900">
+                    Module Under Development
                 </h2>
 
-                <p className="text-gray-500 text-lg mb-6">
-                    The feature you are trying to access is not yet available.
-                    Please check back later or contact support for more information.
+                <p className="mt-5 text-lg leading-8 text-gray-400 max-w-xl mx-auto">
+
+                    This monitoring module is currently being engineered
+                    for MHMS enterprise deployment. Please revisit later
+                    or contact the platform administrator.
+
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-6">
 
                     <button
-                        onClick={() => (window.location.href = "/Dashboard")}
-                        className="px-6 py-3 bg-orange-500 text-white font-semibold rounded-xl shadow hover:bg-orange-600 transition"
+                        onClick={() => window.location.href = "/dashboard"}
+                        className="group flex items-center gap-3 text-indigo-600 font-semibold hover:gap-4 transition-all"
                     >
-                        Go Back Home
+
+                        <span>
+                            Return to Dashboard
+                        </span>
+
+                        <ArrowRight
+                            size={18}
+                            className="group-hover:translate-x-1 transition"
+                        />
+
                     </button>
 
                     <a
                         href="#"
-                        className="px-6 py-3 border border-orange-500 text-orange-500 font-semibold rounded-xl shadow hover:bg-orange-50 transition"
+                        className="flex items-center gap-3 text-gray-500 font-medium hover:text-indigo-600 transition"
                     >
-                        Contact Support
+
+                        <LifeBuoy size={18} />
+
+                        <span>
+                            Contact Support
+                        </span>
+
                     </a>
 
                 </div>
+
+                <p className="mt-14 text-xs tracking-[3px] uppercase text-gray-300">
+                    MHMS Enterprise Platform
+                </p>
+
             </div>
+
         </div>
     );
 };
