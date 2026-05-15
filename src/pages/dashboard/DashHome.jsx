@@ -3,6 +3,8 @@ import CardData from './DashboardContents/CardData'
 import MapData from './DashboardContents/MapData'
 import FactoryCard from './DashboardContents/FactoryCard'
 import Time from './DashboardContents/Time'
+import UserData from './DashboardContents/UserData'
+import UserContent from './DashboardContents/UserContent'
 
 const DashHome = () => {
     return (
@@ -28,7 +30,10 @@ const DashHome = () => {
                 </div>
                 <div className="xl:w-1/5 xl:ml-4">
                     <div className="">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci fuga error suscipit qui beatae, rerum ratione fugiat reprehenderit vitae distinctio, excepturi iste cupiditate deleniti! Ea a dolor aliquid aspernatur laudantium?
+                        <UserData />
+                    </div>
+                    <div className="">
+                        <UserContent />
                     </div>
                 </div>
             </div>

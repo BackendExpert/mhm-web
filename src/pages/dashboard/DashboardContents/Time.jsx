@@ -48,7 +48,7 @@ const Time = () => {
     }, []);
 
     return (
-        <div className="w-full rounded-2xl border border-gray-200 bg-white p-4 shadow-lg flex items-center justify-between gap-4">
+        <div className="w-full rounded-2xl border border-gray-200 bg-white p-4 shadow-lg md:flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-gray-200 bg-gray-50">
                     <FiClock className="text-xl text-indigo-500" />
@@ -63,7 +63,7 @@ const Time = () => {
                 </div>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 md:mt-0 mt-4">
                 <div className="rounded-xl border border-gray-200 bg-gray-50 p-3 text-center">
                     <FiCalendar className="mx-auto text-indigo-500" />
                     <p className="text-xs text-gray-500 mt-1">Date</p>
