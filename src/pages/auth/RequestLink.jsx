@@ -162,9 +162,17 @@ const RequestLink = () => {
                                 </form>
                             </div>
                         </div>
-                        <div className="text-center">
-                            <p className="mb-8 text-gray-500 text-xs ">
-                                Developed and Maintained by <a className='text-indigo-500' href="https://www.blackalphalabs.com/" target='_blank'>blackalphalabs</a>
+                        <div className="text-center mx-8">
+                            <p className="mb-8 text-indigo-200 text-xs">
+                                &copy; {new Date().getFullYear()} Machine Health Monitoring System - All Rights Reserved | Developed and Maintained by{" "}
+                                <a
+                                    className="text-indigo-400 hover:text-indigo-300 transition-colors duration-200"
+                                    href="https://www.blackalphalabs.com/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    BlackAlphaLabs
+                                </a>
                             </p>
                         </div>
                     </div>
