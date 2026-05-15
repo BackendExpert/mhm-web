@@ -25,7 +25,7 @@ const Dashboard = () => {
             {/* mobile menu button */}
             <button
                 onClick={() => setOpen(true)}
-                className="xl:hidden fixed top-4 left-4 z-50 w-11 h-11 bg-orange-500 text-white rounded-full flex items-center justify-center shadow-lg"
+                className="xl:hidden fixed top-4 left-4 z-50 w-11 h-11 bg-indigo-500 text-white rounded-full flex items-center justify-center shadow-lg"
             >
                 <TiThMenu size={22} />
             </button>
@@ -40,7 +40,7 @@ const Dashboard = () => {
 
             {/* SIDEBAR */}
             <div
-                className={`fixed xl:sticky top-0 left-0 z-50 w-[290px] h-screen bg-white border-r border-orange-100 transform transition-transform duration-300 
+                className={`fixed xl:sticky top-0 left-0 z-9999 w-[290px] h-screen bg-white border-r border-orange-100 transform transition-transform duration-300 
                 ${open ? "translate-x-0" : "-translate-x-full"} xl:translate-x-0`}
             >
                 <div className="h-full flex flex-col">
