@@ -5,6 +5,9 @@ import VerifyLink from '../pages/auth/VerifyLink'
 import DefultError from '../component/Errors/DefultError'
 import Guest from '../pages/auth/Guest'
 import PrivateRoute from './PrivateRoute'
+import Dashboard from '../layouts/Dashboard'
+import DashError from '../component/Dashboard/DashError'
+import DashHome from '../pages/dashboard/DashHome'
 
 
 
@@ -20,15 +23,12 @@ function App() {
 
                 </Route>
 
-                {/* <Route path='/dashboard/' element={<PrivateRoute roles={['super_admin', 'system_admin', 'member']} ><Dashboard /></PrivateRoute>}>
+                <Route path='/dashboard/' element={<PrivateRoute roles={['super_admin', 'system_admin', 'member']} ><Dashboard /></PrivateRoute>}>
                     <Route path='*' element={<PrivateRoute roles={['super_admin', 'system_admin', 'member']} ><DashError /></PrivateRoute>} />
                 
                     <Route index element={<PrivateRoute roles={['super_admin', 'system_admin', 'member']} ><DashHome /></PrivateRoute> } />
                 
-                
-                    <Route path='food/categories' element={<PrivateRoute roles={['super_admin', 'system_admin', 'member']} ><CreateCategories /></PrivateRoute> } />
-
-                </Route> */}
+                </Route>
 
 
             </Routes>
