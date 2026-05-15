@@ -1,35 +1,74 @@
-import React from 'react'
+import React from "react";
+import {
+    HiOutlineCpuChip,
+    HiOutlineSignal,
+} from "react-icons/hi2";
 
 const DashFooter = () => {
     return (
-        <footer className="w-full px-8 py-5">
+        <footer className="w-full px-8 py-6">
 
-            <div className="flex flex-col md:flex-row items-center justify-between gap-3">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
 
-                <p className="text-sm text-gray-400 font-medium text-center md:text-left">
-                    Copyright &copy; {new Date().getFullYear()} Jehan Restaurants —
-                    Developed & Maintained by{" "}
-                    <a
-                        href="https://www.blackalphalabs.com/"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-gray-500 hover:text-orange-500 transition-all duration-300"
-                    >
-                        BlackAlphaLabs PVT.Ltd
-                    </a>
-                </p>
+                <div className="text-center md:text-left">
 
-                <div className="flex items-center gap-2 text-xs text-gray-400 font-semibold tracking-wide">
+                    <p className="text-sm text-gray-400 font-medium">
 
-                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                        © {new Date().getFullYear()} MHMS Enterprise
 
-                    <span>
-                        DASHBOARD VERSION v1.0.0
-                    </span>
+                        <span className="mx-2 text-gray-300">
+                            —
+                        </span>
+
+                        Developed by
+
+                        <a
+                            href="https://www.blackalphalabs.com/"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="ml-2 text-indigo-600 hover:text-indigo-500 transition"
+                        >
+                            BlackAlphaLabs PVT.Ltd
+                        </a>
+
+                    </p>
+
                 </div>
-            </div>
-        </footer>
-    )
-}
 
-export default DashFooter
+                <div className="flex items-center gap-5">
+
+                    <div className="flex items-center gap-2">
+
+                        <HiOutlineSignal
+                            size={16}
+                            className="text-green-500"
+                        />
+
+                        <span className="text-xs font-medium tracking-wide text-gray-400">
+                            SYSTEM ONLINE
+                        </span>
+
+                    </div>
+
+                    <div className="flex items-center gap-2">
+
+                        <HiOutlineCpuChip
+                            size={16}
+                            className="text-indigo-500"
+                        />
+
+                        <span className="text-xs font-medium tracking-wide text-gray-400">
+                            VERSION 1.0.0
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </footer>
+    );
+};
+
+export default DashFooter;

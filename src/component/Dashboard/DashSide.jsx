@@ -1,20 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
-    LayoutDashboard,
-    ClipboardList,
-    ShoppingBag,
+    Activity,
+    Shield,
+    Factory,
+    Cpu,
+    Radar,
+    Wrench,
+    BellRing,
+    LineChart,
+    Database,
     Users,
     Settings,
-    Bell,
-    FileText,
     ChevronDown,
     ChevronRight,
-    Flame,
+    Hexagon,
 } from "lucide-react";
 import { NavLink, useLocation } from "react-router-dom";
 
 const DashSide = () => {
-    const [openMenu, setOpenMenu] = useState("Orders");
+    const [openMenu, setOpenMenu] = useState("Factories");
 
     const location = useLocation();
     const menuRef = useRef(null);
@@ -23,59 +27,104 @@ const DashSide = () => {
         setOpenMenu(openMenu === name ? null : name);
     };
 
-    // ✅ FIX 1: Scroll sidebar to top (optional)
     useEffect(() => {
         if (menuRef.current) {
             menuRef.current.scrollTop = 0;
         }
     }, [location.pathname]);
 
-    // ✅ FIX 2: Scroll MAIN PAGE to top (this is what you actually want)
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [location.pathname]);
-
     const menus = [
         {
-            title: "MAIN MENU",
+            title: "Overview",
             items: [
                 {
                     name: "Dashboard",
-                    icon: <LayoutDashboard size={18} />,
+                    icon: <Activity size={18} />,
                     link: "/dashboard",
                 },
+            ],
+        },
+        {
+            title: "Infrastructure",
+            items: [
                 {
-                    name: "Orders",
-                    icon: <ClipboardList size={18} />,
+                    name: "Factories",
+                    icon: <Factory size={18} />,
                     submenu: [
-                        { name: "All Orders", link: "/dashboard/orders" },
-                        { name: "Pending Orders", link: "/dashboard/order/pending" },
-                        { name: "Completed Orders", link: "/dashboard/order/completed" },
+                        { name: "Create Factory", link: "/dashboard/factories/create" },
+                        { name: "All Factories", link: "/dashboard/factory" },
                     ],
                 },
                 {
-                    name: "Foods",
-                    icon: <ShoppingBag size={18} />,
+                    name: "Production Lines",
+                    icon: <Radar size={18} />,
                     submenu: [
-                        { name: "All Foods", link: "/dashboard/foods" },
-                        { name: "Add Food", link: "/dashboard/food/create" },
-                        { name: "Categories", link: "/dashboard/food/categories" },
+                        { name: "Create Line", link: "/dashboard/Productions/create" },
+                        { name: "All Lines", link: "/dashboard/Production" },
+                    ],
+                },
+            ],
+        },
+        {
+            title: "Equipment",
+            items: [
+                {
+                    name: "Machines",
+                    icon: <Cpu size={18} />,
+                    submenu: [
+                        { name: "Machine Registry", link: "/dashboard/Machine" },
                     ],
                 },
                 {
-                    name: "Customers",
+                    name: "Sensors",
+                    icon: <Shield size={18} />,
+                    submenu: [
+                        { name: "Sensor Network", link: "/dashboard/Sensor" },
+                    ],
+                },
+            ],
+        },
+        {
+            title: "Operations",
+            items: [
+                {
+                    name: "Alerts",
+                    icon: <BellRing size={18} />,
+                    submenu: [
+                        { name: "Active Alerts", link: "/dashboard/alert" },
+                    ],
+                },
+                {
+                    name: "Maintenance",
+                    icon: <Wrench size={18} />,
+                    submenu: [
+                        { name: "Maintenance Jobs", link: "/dashboard/Maintenance" },
+                    ],
+                },
+            ],
+        },
+        {
+            title: "Analytics",
+            items: [
+                {
+                    name: "Health Analytics",
+                    icon: <LineChart size={18} />,
+                    link: "/dashboard/analytics",
+                },
+                {
+                    name: "Historical Data",
+                    icon: <Database size={18} />,
+                    link: "/dashboard/history",
+                },
+            ],
+        },
+        {
+            title: "Administration",
+            items: [
+                {
+                    name: "Users",
                     icon: <Users size={18} />,
-                    link: "/dashboard/customers",
-                },
-                {
-                    name: "Reports",
-                    icon: <FileText size={18} />,
-                    link: "/dashboard/reports",
-                },
-                {
-                    name: "Notifications",
-                    icon: <Bell size={18} />,
-                    link: "/dashboard/notifications",
+                    link: "/dashboard/users",
                 },
                 {
                     name: "Settings",
@@ -87,50 +136,58 @@ const DashSide = () => {
     ];
 
     return (
-        <div className="w-full h-screen bg-white border-r border-orange-100 flex flex-col overflow-hidden">
-
-            {/* Scrollbar style */}
+        <div className="w-full h-screen bg-white border-r border-gray-200 flex flex-col overflow-hidden">
             <style>
                 {`
-                    ::-webkit-scrollbar {
-                        width: 4px;
-                    }
-                    ::-webkit-scrollbar-thumb {
-                        background: #f97316;
-                        border-radius: 20px;
-                    }
-                    * {
-                        scrollbar-width: thin;
-                    }
-                `}
+        *{
+            scrollbar-width: thin;
+            scrollbar-color: #c7d2fe transparent;
+        }
+
+        *::-webkit-scrollbar{
+            width: 4px;
+        }
+
+        *::-webkit-scrollbar-track{
+            background: transparent;
+        }
+
+        *::-webkit-scrollbar-thumb{
+            background: #5669b6;
+            border-radius: 999px;
+        }
+
+        *::-webkit-scrollbar-thumb:hover{
+            background: #a5b4fc;
+        }
+    `}
             </style>
 
-            {/* Logo */}
-            <div className="px-5 py-5 border-b border-orange-100 shrink-0">
-                <div className="flex items-center gap-3">
-                    <div className="h-11 w-11 rounded-xl bg-orange-500 flex items-center justify-center">
-                        <Flame className="text-white" size={22} />
+            <div className="px-5 py-5 border-b border-gray-200 shrink-0">
+                <div className="flex items-center gap-4">
+                    <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-indigo-700 flex items-center justify-center shadow-md">
+                        <Hexagon size={22} className="text-white" />
                     </div>
 
                     <div>
-                        <h1 className="text-lg font-bold text-gray-800">
-                            Restaurant
+                        <h1 className="text-gray-900 font-bold text-lg">
+                            MHMS
                         </h1>
-                        <p className="text-xs text-gray-400">
-                            Admin Panel
+                        <p className="text-gray-500 text-xs">
+                            Machine Health Monitoring
                         </p>
                     </div>
                 </div>
             </div>
 
-            {/* Menus */}
             <div
                 ref={menuRef}
                 className="flex-1 overflow-y-auto px-3 py-4"
             >
                 {menus.map((section, index) => (
-                    <div key={index}>
-                        <h2 className="text-[11px] tracking-[2px] font-semibold text-gray-400 mb-3 px-3">
+                    <div key={index} className="mb-5">
+
+                        <h2 className="uppercase px-3 mb-3 text-[10px] tracking-[2px] font-semibold text-gray-400">
                             {section.title}
                         </h2>
 
@@ -142,7 +199,7 @@ const DashSide = () => {
                                         <>
                                             <button
                                                 onClick={() => toggleMenu(item.name)}
-                                                className="w-full flex items-center justify-between px-3 py-3 rounded-xl text-gray-700 hover:bg-orange-50 transition-all"
+                                                className="w-full flex items-center justify-between px-3 py-3 rounded-xl text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all duration-300"
                                             >
                                                 <div className="flex items-center gap-3">
                                                     {item.icon}
@@ -151,30 +208,26 @@ const DashSide = () => {
                                                     </span>
                                                 </div>
 
-                                                {openMenu === item.name ? (
-                                                    <ChevronDown size={16} />
-                                                ) : (
-                                                    <ChevronRight size={16} />
-                                                )}
+                                                {openMenu === item.name
+                                                    ? <ChevronDown size={16} />
+                                                    : <ChevronRight size={16} />}
                                             </button>
 
                                             <div
-                                                className={`overflow-hidden transition-all duration-300 ${
-                                                    openMenu === item.name
-                                                        ? "max-h-[300px] opacity-100 mt-1"
+                                                className={`overflow-hidden transition-all duration-500 ${openMenu === item.name
+                                                        ? "max-h-96 opacity-100 mt-2"
                                                         : "max-h-0 opacity-0"
-                                                }`}
+                                                    }`}
                                             >
-                                                <div className="ml-5 border-l border-orange-100 pl-3 space-y-1">
-                                                    {item.submenu.map((sub, subIndex) => (
+                                                <div className="ml-5 pl-3 border-l border-gray-200 space-y-1">
+                                                    {item.submenu.map((sub, index) => (
                                                         <NavLink
-                                                            key={subIndex}
+                                                            key={index}
                                                             to={sub.link}
                                                             className={({ isActive }) =>
-                                                                `block px-3 py-2 rounded-lg text-sm transition ${
-                                                                    isActive
-                                                                        ? "bg-orange-500 text-white"
-                                                                        : "text-gray-500 hover:bg-orange-50"
+                                                                `block px-3 py-2 rounded-lg text-sm transition-all ${isActive
+                                                                    ? "bg-indigo-600 text-white shadow-sm"
+                                                                    : "text-gray-500 hover:bg-indigo-50 hover:text-indigo-600"
                                                                 }`
                                                             }
                                                         >
@@ -188,10 +241,9 @@ const DashSide = () => {
                                         <NavLink
                                             to={item.link}
                                             className={({ isActive }) =>
-                                                `flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition ${
-                                                    isActive
-                                                        ? "bg-orange-500 text-white"
-                                                        : "text-gray-700 hover:bg-orange-50"
+                                                `flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-all ${isActive
+                                                    ? "bg-indigo-600 text-white shadow-sm"
+                                                    : "text-gray-700 hover:bg-indigo-50 hover:text-indigo-600"
                                                 }`
                                             }
                                         >
@@ -199,24 +251,26 @@ const DashSide = () => {
                                             {item.name}
                                         </NavLink>
                                     )}
+
                                 </div>
                             ))}
                         </div>
+
                     </div>
                 ))}
             </div>
 
-            {/* Footer */}
-            <div className="p-4 border-t border-orange-100 shrink-0">
-                <div className="bg-orange-500 rounded-xl p-3 text-white">
-                    <p className="text-sm font-semibold">
-                        Restaurant Pro
+            <div className="p-4 border-t border-gray-200">
+                <div className="bg-gradient-to-br from-indigo-600 to-indigo-800 rounded-xl p-4 shadow-md">
+                    <p className="text-white font-semibold text-sm">
+                        MHMS Enterprise
                     </p>
-                    <p className="text-xs opacity-90 mt-1">
-                        Smart management system
+                    <p className="text-indigo-100 text-xs mt-1">
+                        Real-time predictive monitoring
                     </p>
                 </div>
             </div>
+
         </div>
     );
 };

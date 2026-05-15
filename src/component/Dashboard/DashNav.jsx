@@ -1,119 +1,203 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import {
-    FaCog,
-    FaUserCircle,
-    FaSignOutAlt,
-    FaBell,
-} from "react-icons/fa";
+    HiOutlineBell,
+    HiOutlineCog6Tooth,
+    HiOutlineArrowRightOnRectangle,
+    HiOutlineUserCircle,
+    HiOutlineChevronDown,
+} from "react-icons/hi2";
 import UserImage from "../../assets/User.png";
 
 const DashNav = () => {
     const { auth } = useAuth();
+
     const [open, setOpen] = useState(false);
+
     const panelRef = useRef(null);
 
     useEffect(() => {
         const handleClickOutside = (e) => {
-            if (panelRef.current && !panelRef.current.contains(e.target)) {
+            if (
+                panelRef.current &&
+                !panelRef.current.contains(e.target)
+            ) {
                 setOpen(false);
             }
         };
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
+
+        document.addEventListener(
+            "mousedown",
+            handleClickOutside
+        );
+
+        return () =>
+            document.removeEventListener(
+                "mousedown",
+                handleClickOutside
+            );
     }, []);
 
     return (
-        <div className="w-full px-6 py-4">
+        <div className="w-full px-8 py-5">
+
             <div className="flex items-center justify-between">
 
                 <div className="xl:ml-0 ml-12">
-                    <h1 className="text-xl font-bold text-gray-800">Dashboard</h1>
-                    <p className="text-xs text-gray-500">
-                        Welcome back, <span className="text-orange-500 font-medium">{auth?.username}</span>
+
+                    <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+                        Dashboard
+                    </h1>
+
+                    <p className="text-sm text-gray-400 mt-1">
+                        Welcome back
+                        <span className="ml-2 font-semibold text-indigo-600">
+                            {auth?.username}
+                        </span>
                     </p>
+
                 </div>
 
-                <div className="flex items-center gap-4">
-                    <div className=" md:flex hidden">
-                        <button className="relative w-10 h-10 rounded-full bg-orange-50 hover:bg-orange-100 transition flex items-center justify-center">
-                            <FaBell className="text-orange-500" />
-                            <span className="absolute top-2 right-2 w-2 h-2 bg-orange-500 rounded-full"></span>
-                        </button>
+                <div className="flex items-center gap-7">
 
-                        <button className="ml-4 w-10 h-10 rounded-full bg-orange-50 hover:bg-orange-500 transition flex items-center justify-center group">
-                            <FaCog className="text-orange-500 group-hover:text-white transition" />
-                        </button>
-                    </div>
+                    <button className="relative text-gray-500 hover:text-indigo-600 transition duration-300 hidden md:flex">
 
+                        <HiOutlineBell size={24} />
 
-                    <div className="relative" ref={panelRef}>
+                        <span className="absolute -top-1 -right-1 w-2 h-2 bg-indigo-500 rounded-full" />
 
-                        <div
+                    </button>
+
+                    <button className="text-gray-500 hover:text-indigo-600 transition duration-300 hidden md:flex">
+
+                        <HiOutlineCog6Tooth size={24} />
+
+                    </button>
+
+                    <div
+                        ref={panelRef}
+                        className="relative"
+                    >
+
+                        <button
                             onClick={() => setOpen(!open)}
-                            className="flex items-center gap-3 cursor-pointer px-3 py-1 rounded-full hover:bg-orange-50 transition"
+                            className="flex items-center gap-4"
                         >
+
                             <div className="text-right hidden sm:block">
-                                <p className="text-sm font-semibold text-gray-800">{auth?.username}</p>
-                                <p className="text-xs text-gray-500">{auth?.role}</p>
+
+                                <p className="text-sm font-semibold text-gray-900">
+                                    {auth?.username}
+                                </p>
+
+                                <p className="text-xs text-gray-400 mt-1">
+                                    {auth?.role}
+                                </p>
+
                             </div>
 
                             <img
                                 src={UserImage}
-                                className="w-9 h-9 rounded-full border-2 border-orange-400 shadow-sm"
                                 alt="user"
+                                className="w-11 h-11 rounded-2xl object-cover"
                             />
-                        </div>
+
+                            <HiOutlineChevronDown
+                                size={18}
+                                className={`text-gray-400 transition duration-500 ${open
+                                        ? "rotate-180 text-indigo-600"
+                                        : ""
+                                    }`}
+                            />
+
+                        </button>
 
                         {open && (
-                            <div className="absolute z-999 right-0 mt-3 w-72 bg-white border border-orange-100 shadow rounded-2xl overflow-hidden animate-fadeIn">
 
-                                <div className="bg-gradient-to-r from-orange-500 to-orange-400 p-4 text-white">
-                                    <div className="flex items-center gap-3">
-                                        <img
-                                            src={UserImage}
-                                            className="w-12 h-12 rounded-full border-2 border-white"
-                                        />
-                                        <div>
-                                            <p className="font-semibold">{auth?.username}</p>
-                                            <p className="text-xs opacity-90">{auth?.email || "user@email.com"}</p>
-                                        </div>
+                            <div className="absolute right-0 mt-5 w-80 bg-white rounded-3xl shadow-2xl p-6 z-50">
+
+                                <div className="flex items-center gap-4 mb-6">
+
+                                    <img
+                                        src={UserImage}
+                                        alt="user"
+                                        className="w-14 h-14 rounded-2xl object-cover"
+                                    />
+
+                                    <div>
+
+                                        <p className="font-semibold text-gray-900">
+                                            {auth?.username}
+                                        </p>
+
+                                        <p className="text-xs text-gray-400 mt-1">
+                                            {auth?.email}
+                                        </p>
+
+                                        <p className="text-xs text-indigo-600 mt-1">
+                                            {auth?.role}
+                                        </p>
+
                                     </div>
+
                                 </div>
 
-                                <div className="p-2">
+                                <div className="space-y-1">
 
                                     <a href="/dashboard/profile">
-                                        <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-orange-50 transition">
-                                            <FaUserCircle className="text-orange-500" />
-                                            <span className="text-sm">My Profile</span>
+
+                                        <button className="w-full flex items-center gap-4 py-3 text-left text-gray-600 hover:text-indigo-600 transition">
+
+                                            <HiOutlineUserCircle size={22} />
+
+                                            <span className="text-sm font-medium">
+                                                My Profile
+                                            </span>
+
                                         </button>
+
                                     </a>
 
                                     <a href="/dashboard/settings">
-                                        <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-orange-50 transition">
-                                            <FaCog className="text-orange-500" />
-                                            <span className="text-sm">Settings</span>
+
+                                        <button className="w-full flex items-center gap-4 py-3 text-left text-gray-600 hover:text-indigo-600 transition">
+
+                                            <HiOutlineCog6Tooth size={22} />
+
+                                            <span className="text-sm font-medium">
+                                                Settings
+                                            </span>
+
                                         </button>
+
                                     </a>
 
-                                    <div className="my-2 border-t border-orange-100" />
+                                    <button className="w-full flex items-center gap-4 py-3 text-left text-gray-600 hover:text-red-500 transition">
 
-                                    <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-red-50 text-red-500 transition">
-                                        <FaSignOutAlt />
-                                        <span className="text-sm">Logout</span>
+                                        <HiOutlineArrowRightOnRectangle size={22} />
+
+                                        <span className="text-sm font-medium">
+                                            Logout
+                                        </span>
+
                                     </button>
+
                                 </div>
 
-                                <div className="text-xs text-center text-gray-400 py-2 border-t border-orange-100">
-                                    Jehan Restaurants • Secure Dashboard
-                                </div>
+                                <p className="text-center text-[11px] text-gray-300 mt-5">
+                                    MHMS Enterprise
+                                </p>
+
                             </div>
+
                         )}
+
                     </div>
 
                 </div>
+
             </div>
+
         </div>
     );
 };
