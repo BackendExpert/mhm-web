@@ -10,6 +10,8 @@ import DashError from '../component/Dashboard/DashError'
 import DashHome from '../pages/dashboard/DashHome'
 import FactoryCreate from '../pages/factories/FactoryCreate'
 import Factories from '../pages/factories/Factories'
+import PLines from '../pages/factories/PLines'
+import CreatePLine from '../pages/factories/CreatePLine'
 
 
 
@@ -33,6 +35,9 @@ function App() {
                     {/* Factories */}
                     <Route path='factories/create' element={<PrivateRoute roles={['super_admin']} ><FactoryCreate /></PrivateRoute> } />
                     <Route path='factory' element={<PrivateRoute roles={['super_admin']} ><Factories /></PrivateRoute> } />
+
+                    <Route path='Productions/create' element={<PrivateRoute roles={['super_admin']} ><CreatePLine /></PrivateRoute> } />
+                    <Route path='Production' element={<PrivateRoute roles={['super_admin']} ><PLines /></PrivateRoute> } />
 
                 
                 </Route>

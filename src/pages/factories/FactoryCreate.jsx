@@ -91,8 +91,8 @@ const FactoryCreate = () => {
             window.location.reload()
 
         } catch (err) {
-            console.log(err.response);
-            console.log(err.response.data);
+            // console.log(err.response);
+            // console.log(err.response.data);
 
             setToast({
                 success: false,
