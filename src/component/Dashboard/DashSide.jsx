@@ -7,17 +7,19 @@ import {
     Radar,
     Wrench,
     BellRing,
-    LineChart,
-    Database,
     Users,
     Settings,
     ChevronDown,
     ChevronRight,
     Hexagon,
 } from "lucide-react";
+
 import { NavLink, useLocation } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const DashSide = () => {
+    const { auth } = useAuth();
+
     const [openMenu, setOpenMenu] = useState("Factories");
 
     const location = useLocation();
@@ -33,6 +35,22 @@ const DashSide = () => {
         }
     }, [location.pathname]);
 
+    useEffect(() => {
+        filteredMenus.forEach((section) => {
+            section.items.forEach((item) => {
+                if (item.submenu) {
+                    const match = item.submenu.find((sub) =>
+                        location.pathname.startsWith(sub.link)
+                    );
+
+                    if (match) {
+                        setOpenMenu(item.name);
+                    }
+                }
+            });
+        });
+    }, [location.pathname]);
+
     const menus = [
         {
             title: "Overview",
@@ -41,68 +59,106 @@ const DashSide = () => {
                     name: "Dashboard",
                     icon: <Activity size={18} />,
                     link: "/dashboard",
+                    roles: ['super_admin', 'plant_admin', 'engineer', 'viewer'],
                 },
             ],
         },
+
         {
             title: "Infrastructure",
             items: [
                 {
                     name: "Factories",
                     icon: <Factory size={18} />,
+                    roles: ['super_admin'],
                     submenu: [
-                        { name: "Create Factory", link: "/dashboard/factories/create" },
-                        { name: "All Factories", link: "/dashboard/factory" },
+                        {
+                            name: "Create Factory",
+                            link: "/dashboard/factories/create",
+                        },
+                        {
+                            name: "All Factories",
+                            link: "/dashboard/factory",
+                        },
                     ],
                 },
+
                 {
                     name: "Production Lines",
                     icon: <Radar size={18} />,
+                    roles: ['super_admin'],
                     submenu: [
-                        { name: "Create Line", link: "/dashboard/Productions/create" },
-                        { name: "All Lines", link: "/dashboard/Production" },
+                        {
+                            name: "Create Line",
+                            link: "/dashboard/Productions/create",
+                        },
+                        {
+                            name: "All Lines",
+                            link: "/dashboard/Production",
+                        },
                     ],
                 },
             ],
         },
+
         {
             title: "Equipment",
             items: [
                 {
                     name: "Machines",
                     icon: <Cpu size={18} />,
+                    roles: ['super_admin', 'plant_admin', 'engineer', 'viewer'],
                     submenu: [
-                        { name: "Machine Registry", link: "/dashboard/Machine" },
+                        {
+                            name: "Machine Registry",
+                            link: "/dashboard/Machine",
+                        },
                     ],
                 },
+
                 {
                     name: "Sensors",
                     icon: <Shield size={18} />,
+                    roles: ['super_admin', 'plant_admin', 'engineer', 'viewer'],
                     submenu: [
-                        { name: "Sensor Network", link: "/dashboard/Sensor" },
+                        {
+                            name: "Sensor Network",
+                            link: "/dashboard/Sensor",
+                        },
                     ],
                 },
             ],
         },
+
         {
             title: "Operations",
             items: [
                 {
                     name: "Alerts",
                     icon: <BellRing size={18} />,
+                    roles: ['super_admin', 'plant_admin', 'engineer', 'viewer'],
                     submenu: [
-                        { name: "Active Alerts", link: "/dashboard/alert" },
+                        {
+                            name: "Active Alerts",
+                            link: "/dashboard/alert",
+                        },
                     ],
                 },
+
                 {
                     name: "Maintenance",
                     icon: <Wrench size={18} />,
+                    roles: ['super_admin', 'plant_admin', 'engineer', 'viewer'],
                     submenu: [
-                        { name: "Maintenance Jobs", link: "/dashboard/Maintenance" },
+                        {
+                            name: "Maintenance Jobs",
+                            link: "/dashboard/Maintenance",
+                        },
                     ],
                 },
             ],
         },
+
         {
             title: "Administration",
             items: [
@@ -110,42 +166,54 @@ const DashSide = () => {
                     name: "Users",
                     icon: <Users size={18} />,
                     link: "/dashboard/users",
+                    roles: ['super_admin', 'plant_admin'],
                 },
+
                 {
                     name: "Settings",
                     icon: <Settings size={18} />,
                     link: "/dashboard/settings",
+                    roles: ['super_admin', 'plant_admin'],
                 },
             ],
         },
     ];
 
+    const filteredMenus = menus
+        .map((section) => ({
+            ...section,
+            items: section.items.filter((item) =>
+                item.roles.includes(auth?.role)
+            ),
+        }))
+        .filter((section) => section.items.length > 0);
+
     return (
         <div className="w-full h-screen bg-white border-r border-gray-200 flex flex-col overflow-hidden">
             <style>
                 {`
-        *{
-            scrollbar-width: thin;
-            scrollbar-color: #c7d2fe transparent;
-        }
+                    *{
+                        scrollbar-width: thin;
+                        scrollbar-color: #c7d2fe transparent;
+                    }
 
-        *::-webkit-scrollbar{
-            width: 4px;
-        }
+                    *::-webkit-scrollbar{
+                        width: 4px;
+                    }
 
-        *::-webkit-scrollbar-track{
-            background: transparent;
-        }
+                    *::-webkit-scrollbar-track{
+                        background: transparent;
+                    }
 
-        *::-webkit-scrollbar-thumb{
-            background: #5669b6;
-            border-radius: 999px;
-        }
+                    *::-webkit-scrollbar-thumb{
+                        background: #5669b6;
+                        border-radius: 999px;
+                    }
 
-        *::-webkit-scrollbar-thumb:hover{
-            background: #a5b4fc;
-        }
-    `}
+                    *::-webkit-scrollbar-thumb:hover{
+                        background: #a5b4fc;
+                    }
+                `}
             </style>
 
             <div className="px-5 py-5 border-b border-gray-200 shrink-0">
@@ -158,6 +226,7 @@ const DashSide = () => {
                         <h1 className="text-gray-900 font-bold text-lg">
                             MHMS
                         </h1>
+
                         <p className="text-gray-500 text-xs">
                             Machine Health Monitoring
                         </p>
@@ -169,9 +238,8 @@ const DashSide = () => {
                 ref={menuRef}
                 className="flex-1 overflow-y-auto px-3 py-4"
             >
-                {menus.map((section, index) => (
+                {filteredMenus.map((section, index) => (
                     <div key={index} className="mb-5">
-
                         <h2 className="uppercase px-3 mb-3 text-[10px] tracking-[2px] font-semibold text-gray-400">
                             {section.title}
                         </h2>
@@ -179,23 +247,28 @@ const DashSide = () => {
                         <div className="space-y-1">
                             {section.items.map((item, i) => (
                                 <div key={i}>
-
                                     {item.submenu ? (
                                         <>
                                             <button
                                                 onClick={() => toggleMenu(item.name)}
-                                                className="w-full flex items-center justify-between px-3 py-3 rounded-xl text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-all duration-300"
+                                                className={`w-full flex items-center justify-between px-3 py-3 rounded-xl transition-all duration-300 ${openMenu === item.name
+                                                        ? "bg-indigo-50 text-indigo-600"
+                                                        : "text-gray-700 hover:bg-indigo-50 hover:text-indigo-600"
+                                                    }`}
                                             >
                                                 <div className="flex items-center gap-3">
                                                     {item.icon}
+
                                                     <span className="text-sm font-medium">
                                                         {item.name}
                                                     </span>
                                                 </div>
 
-                                                {openMenu === item.name
-                                                    ? <ChevronDown size={16} />
-                                                    : <ChevronRight size={16} />}
+                                                {openMenu === item.name ? (
+                                                    <ChevronDown size={16} />
+                                                ) : (
+                                                    <ChevronRight size={16} />
+                                                )}
                                             </button>
 
                                             <div
@@ -236,11 +309,9 @@ const DashSide = () => {
                                             {item.name}
                                         </NavLink>
                                     )}
-
                                 </div>
                             ))}
                         </div>
-
                     </div>
                 ))}
             </div>
@@ -248,14 +319,14 @@ const DashSide = () => {
             <div className="p-4 border-t border-gray-200">
                 <div className="bg-gradient-to-br from-indigo-600 to-indigo-800 rounded-xl p-4 shadow-md">
                     <p className="text-white font-semibold text-sm">
-                        MHMS Enterprise
+                        {auth?.user?.username || "User"}
                     </p>
-                    <p className="text-indigo-100 text-xs mt-1">
-                        Real-time predictive monitoring
+
+                    <p className="text-indigo-100 text-xs mt-1 capitalize">
+                        {auth?.role}
                     </p>
                 </div>
             </div>
-
         </div>
     );
 };

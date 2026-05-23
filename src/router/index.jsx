@@ -8,6 +8,8 @@ import PrivateRoute from './PrivateRoute'
 import Dashboard from '../layouts/Dashboard'
 import DashError from '../component/Dashboard/DashError'
 import DashHome from '../pages/dashboard/DashHome'
+import FactoryCreate from '../pages/factories/FactoryCreate'
+import Factories from '../pages/factories/Factories'
 
 
 
@@ -23,10 +25,15 @@ function App() {
 
                 </Route>
 
-                <Route path='/dashboard/' element={<PrivateRoute roles={['super_admin', 'system_admin', 'member']} ><Dashboard /></PrivateRoute>}>
-                    <Route path='*' element={<PrivateRoute roles={['super_admin', 'system_admin', 'member']} ><DashError /></PrivateRoute>} />
+                <Route path='/dashboard/' element={<PrivateRoute roles={['super_admin', 'plant_admin', 'engineer', 'viewer']} ><Dashboard /></PrivateRoute>}>
+                    <Route path='*' element={<PrivateRoute roles={['super_admin', 'plant_admin', 'engineer', 'viewer']} ><DashError /></PrivateRoute>} />
                 
-                    <Route index element={<PrivateRoute roles={['super_admin', 'system_admin', 'member']} ><DashHome /></PrivateRoute> } />
+                    <Route index element={<PrivateRoute roles={['super_admin', 'plant_admin', 'engineer', 'viewer']} ><DashHome /></PrivateRoute> } />
+                    
+                    {/* Factories */}
+                    <Route path='factories/create' element={<PrivateRoute roles={['super_admin']} ><FactoryCreate /></PrivateRoute> } />
+                    <Route path='factory' element={<PrivateRoute roles={['super_admin']} ><Factories /></PrivateRoute> } />
+
                 
                 </Route>
 

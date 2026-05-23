@@ -14,7 +14,7 @@ const DefaultInput = ({
             {label && (
                 <label
                     htmlFor={name}
-                    className="block mb-2 text-xs font-semibold text-indigo-600"
+                    className="block text-xs font-semibold mb-2 text-gray-700"
                 >
                     {label}
                 </label>
@@ -29,17 +29,23 @@ const DefaultInput = ({
                 required={required}
                 placeholder={placeholder}
                 className="
-                    w-full
-                    px-1 py-2
-                    bg-transparent
-                    text-gray-800
-                    placeholder-indigo-300
-                    border-0
-                    border-b-2
-                    border-indigo-200
-                    focus:border-indigo-600
+                    w-full px-4 py-3
+                    rounded
+                    border border-gray-100
+                    bg-white/90 backdrop-blur-sm
+                    text-sm text-gray-800
+                    placeholder:text-gray-400
+
+                    shadow-sm
+
                     focus:outline-none
-                    transition-all duration-200
+                    focus:border-gray-300
+                    focus:ring-1 focus:ring-gray-200/60
+
+                    hover:border-gray-300
+                    hover:shadow-md
+
+                    transition-all duration-300
                 "
             />
         </div>
