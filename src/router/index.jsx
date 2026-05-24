@@ -12,6 +12,8 @@ import FactoryCreate from '../pages/factories/FactoryCreate'
 import Factories from '../pages/factories/Factories'
 import PLines from '../pages/factories/PLines'
 import CreatePLine from '../pages/factories/CreatePLine'
+import Machine from '../pages/Machine/Machine'
+import CreateMachine from '../pages/Machine/CreateMachine'
 
 
 
@@ -39,6 +41,9 @@ function App() {
                     <Route path='Productions/create' element={<PrivateRoute roles={['super_admin']} ><CreatePLine /></PrivateRoute> } />
                     <Route path='Production' element={<PrivateRoute roles={['super_admin']} ><PLines /></PrivateRoute> } />
 
+                    {/* Machine */}
+                    <Route path='Machine' element={<PrivateRoute roles={['super_admin', 'plant_admin', 'engineer']} ><Machine /></PrivateRoute> } />
+                    <Route path='Machines/create' element={<PrivateRoute roles={['super_admin']} ><CreateMachine /></PrivateRoute> } />
                 
                 </Route>
 
